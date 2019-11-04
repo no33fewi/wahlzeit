@@ -17,6 +17,18 @@ public class Coordinate implements Serializable {
         this.z = z;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
     public double getDistance(Coordinate other) {
         double x2 = (other.x - this.x) * (other.x - this.x);
         double y2 = (other.y - this.y) * (other.y - this.y);
@@ -25,7 +37,7 @@ public class Coordinate implements Serializable {
     }
 
     public boolean isEqual(Coordinate other){
-        return other.x == this.x && other.y == this.y && other.z == this.y;
+        return other.x == this.x && other.y == this.y && other.z == this.z;
     }
 
     public String asString() { return "(" + x + ", " + y + ", " + z + ")"; }
