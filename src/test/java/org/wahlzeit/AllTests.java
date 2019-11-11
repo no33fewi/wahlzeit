@@ -9,8 +9,8 @@ import org.wahlzeit.utils.UtilsTestSuite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        HandlersTestSuite.class,
         ModelTestSuite.class,
+        HandlersTestSuite.class,
         ServicesTestSuite.class,
         UtilsTestSuite.class
 })

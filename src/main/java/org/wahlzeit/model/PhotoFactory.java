@@ -72,6 +72,10 @@ public class PhotoFactory {
 		instance = photoFactory;
 	}
 
+	public static void resetInstance() {
+		instance = null;
+	}
+
 	/**
 	 * @methodtype factory
 	 */
