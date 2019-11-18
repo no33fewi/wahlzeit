@@ -8,7 +8,6 @@ import org.wahlzeit.model.persistence.PersistenceTestSuite;
 @Suite.SuiteClasses({
         PersistenceTestSuite.class,
         AccessRightsTest.class,
-        CoordinateTest.class,
         FlagReasonTest.class,
         GenderTest.class,
         GuestTest.class,
@@ -19,7 +18,10 @@ import org.wahlzeit.model.persistence.PersistenceTestSuite;
         ValueTest.class,
         MotorcyclePhotoManagerTest.class,
         MotorcyclePhotoFactoryTest.class,
-        MotorcyclePhotoTest.class
+        MotorcyclePhotoTest.class,
+        CoordinateTest.class,
+        CartesianCoordinateTest.class,
+        SphericCoordinateTest.class
 })
 public class ModelTestSuite {
 }
