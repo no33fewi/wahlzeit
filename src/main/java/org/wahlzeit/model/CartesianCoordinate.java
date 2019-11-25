@@ -62,11 +62,14 @@ public class CartesianCoordinate implements Coordinate {
 
     @Override
     public boolean isEqual(Coordinate other) {
+        if (other == null) return false;
         CartesianCoordinate otherCartesian = other.asCartesianCoordinate();
         return otherCartesian.x == this.x && otherCartesian.y == this.y && otherCartesian.z == this.z;
     }
 
     public double getDistance(CartesianCoordinate other) {
+        if(other==null)
+            throw new NullPointerException();
         double x2 = (other.x - this.x) * (other.x - this.x);
         double y2 = (other.y - this.y) * (other.y - this.y);
         double z2 = (other.z - this.z) * (other.z - this.z);

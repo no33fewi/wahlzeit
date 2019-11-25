@@ -56,6 +56,8 @@ public class SphericCoordinate implements Coordinate {
 
     @Override
     public double getCentralAngle(Coordinate other) {
+        if(other==null)
+            throw new NullPointerException();
         SphericCoordinate otherSpheric = other.asSphericCoordinate();
         return Math.acos(Math.sin(this.theta) * Math.sin(otherSpheric.getTheta()) +
                 Math.cos(this.theta) * Math.cos(otherSpheric.getTheta()) * Math.cos(this.phi - otherSpheric.getPhi()));
@@ -80,7 +82,7 @@ public class SphericCoordinate implements Coordinate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(phi, theta, radius);
+        return asCartesianCoordinate().hashCode();
     }
 
     @Override
