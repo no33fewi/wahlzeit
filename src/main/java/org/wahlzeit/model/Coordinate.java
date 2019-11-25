@@ -2,13 +2,13 @@ package org.wahlzeit.model;
 
 public interface Coordinate {
 
-    public CartesianCoordinate asCartesianCoordinate();
+    CartesianCoordinate asCartesianCoordinate();
 
-    public double getCartesianDistance(Coordinate other);
+    double getCartesianDistance(Coordinate other);
 
-    public SphericCoordinate asSphericCoordinate();
+    SphericCoordinate asSphericCoordinate();
 
     double getCentralAngle(Coordinate other);
 
-    boolean isEqual(Coordinate coordinate);
+    boolean isEqual(Coordinate other);
 }

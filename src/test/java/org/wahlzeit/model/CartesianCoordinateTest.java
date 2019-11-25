@@ -19,6 +19,17 @@ public class CartesianCoordinateTest {
     }
 
     @Test
+    public void testCentralAngle() {
+        final double delta = 0.001;
+        CartesianCoordinate coordinate0 = new CartesianCoordinate(1.0, 0.0, 0.0);
+        CartesianCoordinate coordinate1 = new CartesianCoordinate(0.0, 0.0, 1.0);
+
+        double centralAngle = coordinate0.getCentralAngle(coordinate1);
+
+        assertEquals(Math.PI / 2,centralAngle,delta);
+    }
+
+    @Test
     public void testGetDistance() {
         final double delta = 0.001;
         CartesianCoordinate coordinate0 = new CartesianCoordinate(0.0,0.0,0.0);

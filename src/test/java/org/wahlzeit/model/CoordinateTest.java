@@ -32,6 +32,20 @@ public class CoordinateTest {
     }
 
     @Test
+    public void testHashCode() {
+        CartesianCoordinate cc = new CartesianCoordinate(5.0,-3.0,2.0);
+        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,-2.0);
+
+        int ccHash1 = cc.hashCode();
+        int ccHash2 = cc.asSphericCoordinate().hashCode();
+        int scHash1 = sc.hashCode();
+        int scHash2 = sc.asCartesianCoordinate().hashCode();
+
+        assertEquals(ccHash1,ccHash2);
+        assertEquals(scHash1,scHash2);
+    }
+
+    @Test
     public void testDistance() {
         final double delta = 0.001;
         CartesianCoordinate cc1 = new CartesianCoordinate(5.0,-3.0,2.0);

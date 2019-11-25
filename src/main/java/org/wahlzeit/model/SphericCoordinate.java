@@ -2,7 +2,7 @@ package org.wahlzeit.model;
 
 import java.util.Objects;
 
-public class SphericCoordinate implements Coordinate {
+public class SphericCoordinate extends AbstractCoordinate {
 
     private double phi, theta, radius;
 
@@ -45,48 +45,7 @@ public class SphericCoordinate implements Coordinate {
     }
 
     @Override
-    public double getCartesianDistance(Coordinate other) {
-        return asCartesianCoordinate().getCartesianDistance(other);
-    }
-
-    @Override
     public SphericCoordinate asSphericCoordinate() {
         return this;
-    }
-
-    @Override
-    public double getCentralAngle(Coordinate other) {
-        if(other==null)
-            throw new NullPointerException();
-        SphericCoordinate otherSpheric = other.asSphericCoordinate();
-        return Math.acos(Math.sin(this.theta) * Math.sin(otherSpheric.getTheta()) +
-                Math.cos(this.theta) * Math.cos(otherSpheric.getTheta()) * Math.cos(this.phi - otherSpheric.getPhi()));
-    }
-
-    @Override
-    public boolean isEqual(Coordinate coordinate) {
-        return asCartesianCoordinate().isEqual(coordinate);
-    }
-
-    public String asString() {
-        return "(phi: " + phi + ", theta: " + theta + ", radius: " + radius + ")";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Coordinate)) return false;
-        Coordinate that = (Coordinate) o;
-        return isEqual(that);
-    }
-
-    @Override
-    public int hashCode() {
-        return asCartesianCoordinate().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return asString();
     }
 }
