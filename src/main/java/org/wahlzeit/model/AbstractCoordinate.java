@@ -6,31 +6,38 @@ public abstract class AbstractCoordinate implements Coordinate {
 
     @Override
     public double getCartesianDistance(Coordinate other) {
-        if (other == null)
-            throw new NullPointerException();
+        assertIsNonNullArgument(other);
+
         CartesianCoordinate me = this.asCartesianCoordinate();
         CartesianCoordinate o = other.asCartesianCoordinate();
 
         double x2 = (o.getX() - me.getX()) * (o.getX() - me.getX());
         double y2 = (o.getY() - me.getY()) * (o.getY() - me.getY());
         double z2 = (o.getZ() - me.getZ()) * (o.getZ() - me.getZ());
-        return Math.sqrt(x2 + y2 + z2);
+        double dist = Math.sqrt(x2 + y2 + z2);
+
+        assert Double.isFinite(dist);
+        return dist;
     }
 
     @Override
     public double getCentralAngle(Coordinate other) {
-        if (other == null)
-            throw new NullPointerException();
+        assertIsNonNullArgument(other);
+
         SphericCoordinate me = this.asSphericCoordinate();
         SphericCoordinate o = other.asSphericCoordinate();
 
-        return Math.acos(Math.sin(me.getTheta()) * Math.sin(o.getTheta()) +
+        double angle = Math.acos(Math.sin(me.getTheta()) * Math.sin(o.getTheta()) +
                 Math.cos(me.getTheta()) * Math.cos(o.getTheta()) * Math.cos(me.getPhi() - o.getPhi()));
+
+        assert Double.isFinite(angle);
+        return angle;
     }
 
     @Override
     public boolean isEqual(Coordinate other) {
-        if (other == null) return false;
+        assertIsNonNullArgument(other);
+
         CartesianCoordinate me = this.asCartesianCoordinate();
         CartesianCoordinate o = other.asCartesianCoordinate();
         return o.getX() == me.getX() && o.getY() == me.getY() && o.getZ() == me.getZ();
@@ -59,4 +66,11 @@ public abstract class AbstractCoordinate implements Coordinate {
     public String toString() {
         return asString();
     }
+
+    protected void assertIsNonNullArgument(Object arg) {
+        if (arg == null)
+            throw new IllegalArgumentException("Argument cannot be null.");
+    }
+
+    protected abstract void assertClassInvariant();
 }

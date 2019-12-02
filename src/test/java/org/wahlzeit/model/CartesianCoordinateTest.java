@@ -57,4 +57,11 @@ public class CartesianCoordinateTest {
         assertTrue(coordinate1.isEqual(coordinate2));
         assertTrue(coordinate2.isEqual(coordinate1));
     }
+
+    @Test(expected = AssertionError.class)
+    public void testClassInvariant() {
+        double x = 5.0, y = Double.POSITIVE_INFINITY, z = 15.0;
+
+        CartesianCoordinate coordinate = new CartesianCoordinate(x,y,z);
+    }
 }

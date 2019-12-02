@@ -22,7 +22,7 @@ public class CoordinateTest {
     @Test
     public void testIsEqual() {
         CartesianCoordinate cc = new CartesianCoordinate(5.0,-3.0,2.0);
-        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,-2.0);
+        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,3.0);
 
         boolean equals1 = cc.isEqual(cc.asSphericCoordinate());
         boolean equals2 = sc.isEqual(sc.asCartesianCoordinate());
@@ -34,7 +34,7 @@ public class CoordinateTest {
     @Test
     public void testHashCode() {
         CartesianCoordinate cc = new CartesianCoordinate(5.0,-3.0,2.0);
-        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,-2.0);
+        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,3.0);
 
         int ccHash1 = cc.hashCode();
         int ccHash2 = cc.asSphericCoordinate().hashCode();
@@ -59,6 +59,20 @@ public class CoordinateTest {
 
         assertEquals(cartesianDistRef,cartesianDistSpherical,delta);
         assertEquals(cartesianDistRef,cartesianDistMixed,delta);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDistancePrecondition() {
+        Coordinate c1 = new CartesianCoordinate(5.0,-3.0,2.0);
+
+        c1.getCentralAngle(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCentralAnglePrecondition() {
+        Coordinate c1 = new CartesianCoordinate(5.0,-3.0,2.0);
+
+        c1.getCentralAngle(null);
     }
 
 }
