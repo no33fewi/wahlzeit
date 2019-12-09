@@ -58,7 +58,7 @@ public class CartesianCoordinateTest {
         assertTrue(coordinate2.isEqual(coordinate1));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testClassInvariant() {
         double x = 5.0, y = Double.POSITIVE_INFINITY, z = 15.0;
 

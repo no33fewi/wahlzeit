@@ -13,6 +13,10 @@ public class Location implements Serializable {
     }
 
     public Location(String name, Coordinate coordinate){
+        if(name == null || name.isEmpty())
+            throw new IllegalArgumentException("Name should not be null or empty");
+        if(coordinate == null)
+            throw new IllegalArgumentException("Coordinate should not be null");
         this.name = name;
         this.coordinate = coordinate;
     }
@@ -22,6 +26,8 @@ public class Location implements Serializable {
     }
 
     public void setName(String name) {
+        if(name == null || name.isEmpty())
+            throw new IllegalArgumentException("Name should not be null or empty");
         this.name = name;
     }
 
@@ -30,6 +36,8 @@ public class Location implements Serializable {
     }
 
     public void setCoordinate(Coordinate coordinate) {
+        if(coordinate == null)
+            throw new IllegalArgumentException("Coordinate should not be null");
         this.coordinate = coordinate;
     }
 }

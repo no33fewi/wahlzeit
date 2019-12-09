@@ -6,7 +6,14 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     private double phi, theta, radius;
 
-    public SphericCoordinate(double phi, double theta, double radius) {
+    public SphericCoordinate(double phi, double theta, double radius) throws IllegalArgumentException, IllegalStateException {
+        if(!Double.isFinite(phi))
+            throw new IllegalArgumentException("Phi must be a finite value. The value " + phi + " is not valid");
+        if(!Double.isFinite(theta))
+            throw new IllegalArgumentException("Theta must be a finite value. The value " + theta + " is not valid");
+        if(!Double.isFinite(radius))
+            throw new IllegalArgumentException("Radius must be a finite value. The value " + radius + " is not valid");
+
         this.phi = phi;
         this.theta = theta;
         this.radius = radius;
@@ -19,6 +26,8 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     public void setPhi(double phi) {
+        if(!Double.isFinite(phi))
+            throw new IllegalArgumentException("Phi must be a finite value. The value " + phi + " is not valid");
         this.phi = phi;
         assertClassInvariant();
     }
@@ -28,6 +37,8 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     public void setTheta(double theta) {
+        if(!Double.isFinite(theta))
+            throw new IllegalArgumentException("Theta must be a finite value. The value " + theta + " is not valid");
         this.theta = theta;
         assertClassInvariant();
     }
@@ -37,6 +48,8 @@ public class SphericCoordinate extends AbstractCoordinate {
     }
 
     public void setRadius(double radius) {
+        if(!Double.isFinite(radius))
+            throw new IllegalArgumentException("Radius must be a finite value. The value " + radius + " is not valid");
         this.radius = radius;
         assertClassInvariant();
     }
@@ -56,9 +69,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     @Override
     protected void assertClassInvariant() {
-        assert Double.isFinite(this.phi);
-        assert Double.isFinite(this.theta);
-        assert Double.isFinite(this.radius);
-        assert this.radius >= 0;
+        if(!Double.isFinite(this.phi)||!Double.isFinite(this.theta)||!Double.isFinite(this.radius)||this.radius < 0)
+            throw new IllegalStateException("Class invariant violation");
     }
 }

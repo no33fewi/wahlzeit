@@ -59,7 +59,7 @@ public class SphericCoordinateTest {
         assertTrue(coordinate2.isEqual(coordinate1));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testClassInvariant() {
         double phi = Double.NaN, theta = 10.0, radius = 15.0;
 

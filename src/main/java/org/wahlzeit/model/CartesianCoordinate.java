@@ -8,6 +8,13 @@ public class CartesianCoordinate extends AbstractCoordinate {
     private double x, y, z;
 
     public CartesianCoordinate(double x, double y, double z){
+        if(!Double.isFinite(x))
+            throw new IllegalArgumentException("X must be a finite value. The value " + x + " is not valid");
+        if(!Double.isFinite(y))
+            throw new IllegalArgumentException("Y must be a finite value. The value " + y + " is not valid");
+        if(!Double.isFinite(z))
+            throw new IllegalArgumentException("Z must be a finite value. The value " + z + " is not valid");
+
         this.x = x;
         this.y = y;
         this.z = z;
@@ -20,6 +27,8 @@ public class CartesianCoordinate extends AbstractCoordinate {
     }
 
     public void setX(double x) {
+        if(!Double.isFinite(x))
+            throw new IllegalArgumentException("X must be a finite value. The value " + x + " is not valid");
         this.x = x;
         assertClassInvariant();
     }
@@ -29,6 +38,8 @@ public class CartesianCoordinate extends AbstractCoordinate {
     }
 
     public void setY(double y) {
+        if(!Double.isFinite(y))
+            throw new IllegalArgumentException("Y must be a finite value. The value " + y + " is not valid");
         this.y = y;
         assertClassInvariant();
     }
@@ -38,6 +49,8 @@ public class CartesianCoordinate extends AbstractCoordinate {
     }
 
     public void setZ(double z) {
+        if(!Double.isFinite(z))
+            throw new IllegalArgumentException("Z must be a finite value. The value " + z + " is not valid");
         this.z = z;
         assertClassInvariant();
     }
@@ -57,8 +70,7 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     @Override
     protected void assertClassInvariant() {
-        assert Double.isFinite(this.x);
-        assert Double.isFinite(this.y);
-        assert Double.isFinite(this.z);
+        if(!Double.isFinite(this.x)||!Double.isFinite(this.y)||!Double.isFinite(this.z))
+            throw new IllegalStateException("Class invariant violation");
     }
 }

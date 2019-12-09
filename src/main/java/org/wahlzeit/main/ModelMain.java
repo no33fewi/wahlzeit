@@ -78,7 +78,7 @@ public abstract class ModelMain extends AbstractMain {
 	/**
 	 *
 	 */
-	public void saveAll() throws IOException{
+	public void saveAll() throws Exception{
 		PhotoCaseManager.getInstance().savePhotoCases();
 		MotorcyclePhotoManager.getInstance().savePhotos();
 		UserManager.getInstance().saveClients();

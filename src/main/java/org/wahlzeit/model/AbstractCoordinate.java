@@ -67,9 +67,9 @@ public abstract class AbstractCoordinate implements Coordinate {
         return asString();
     }
 
-    protected void assertIsNonNullArgument(Object arg) {
+    protected void assertIsNonNullArgument(Object arg) throws IllegalArgumentException {
         if (arg == null)
-            throw new IllegalArgumentException("Argument cannot be null.");
+            throw new IllegalArgumentException("Argument should not be null.");
     }
 
     protected abstract void assertClassInvariant();
