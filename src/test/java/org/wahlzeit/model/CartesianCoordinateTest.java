@@ -7,11 +7,31 @@ import static org.junit.Assert.*;
 public class CartesianCoordinateTest {
 
     @Test
+    public void testShared() {
+        CartesianCoordinate coordinate0 = CartesianCoordinate.getCartesianCoordinate(1.0, 0.0, 1.0);
+        CartesianCoordinate coordinate1 = CartesianCoordinate.getCartesianCoordinate(1.0, 0.0, 1.0);
+        CartesianCoordinate coordinate2 = CartesianCoordinate.getCartesianCoordinate(2.0, 0.0, 1.0);
+
+        assertSame(coordinate0,coordinate1);
+        assertNotSame(coordinate0,coordinate2);
+    }
+
+    @Test
+    public void testImmutable() {
+        CartesianCoordinate coordinate0 = CartesianCoordinate.getCartesianCoordinate(1.0, 0.0, 1.0);
+
+        CartesianCoordinate coordinate1 = coordinate0.withX(4.0);
+
+        assertNotEquals(coordinate0,coordinate1);
+        assertNotSame(coordinate0,coordinate1);
+    }
+
+    @Test
     public void testGetters() {
         final double delta = 0.001;
         double x = 5.0, y = 10.0, z = 15.0;
 
-        CartesianCoordinate coordinate = new CartesianCoordinate(x,y,z);
+        CartesianCoordinate coordinate = CartesianCoordinate.getCartesianCoordinate(x,y,z);
 
         assertEquals(x,coordinate.getX(),delta);
         assertEquals(y,coordinate.getY(),delta);
@@ -21,8 +41,8 @@ public class CartesianCoordinateTest {
     @Test
     public void testCentralAngle() {
         final double delta = 0.001;
-        CartesianCoordinate coordinate0 = new CartesianCoordinate(1.0, 0.0, 0.0);
-        CartesianCoordinate coordinate1 = new CartesianCoordinate(0.0, 0.0, 1.0);
+        CartesianCoordinate coordinate0 = CartesianCoordinate.getCartesianCoordinate(1.0, 0.0, 0.0);
+        CartesianCoordinate coordinate1 = CartesianCoordinate.getCartesianCoordinate(0.0, 0.0, 1.0);
 
         double centralAngle = coordinate0.getCentralAngle(coordinate1);
 
@@ -32,8 +52,8 @@ public class CartesianCoordinateTest {
     @Test
     public void testGetDistance() {
         final double delta = 0.001;
-        CartesianCoordinate coordinate0 = new CartesianCoordinate(0.0,0.0,0.0);
-        CartesianCoordinate coordinate1 = new CartesianCoordinate(1.0,1.0,1.0);
+        CartesianCoordinate coordinate0 = CartesianCoordinate.getCartesianCoordinate(0.0,0.0,0.0);
+        CartesianCoordinate coordinate1 = CartesianCoordinate.getCartesianCoordinate(1.0,1.0,1.0);
 
         double distC0C0 = coordinate0.getCartesianDistance(coordinate0);
         double distC1C1 = coordinate1.getCartesianDistance(coordinate1);
@@ -48,9 +68,9 @@ public class CartesianCoordinateTest {
 
     @Test
     public void testIsEqual(){
-        CartesianCoordinate coordinate0 = new CartesianCoordinate(5.0,8.0,4.0);
-        CartesianCoordinate coordinate1 = new CartesianCoordinate(2.0,7.0,4.0);
-        CartesianCoordinate coordinate2 = new CartesianCoordinate(2.0,7.0,4.0);
+        CartesianCoordinate coordinate0 = CartesianCoordinate.getCartesianCoordinate(5.0,8.0,4.0);
+        CartesianCoordinate coordinate1 = CartesianCoordinate.getCartesianCoordinate(2.0,7.0,4.0);
+        CartesianCoordinate coordinate2 = CartesianCoordinate.getCartesianCoordinate(2.0,7.0,4.0);
 
         assertFalse(coordinate0.isEqual(coordinate1));
         assertFalse(coordinate1.isEqual(coordinate0));
@@ -62,6 +82,6 @@ public class CartesianCoordinateTest {
     public void testClassInvariant() {
         double x = 5.0, y = Double.POSITIVE_INFINITY, z = 15.0;
 
-        CartesianCoordinate coordinate = new CartesianCoordinate(x,y,z);
+        CartesianCoordinate coordinate = CartesianCoordinate.getCartesianCoordinate(x,y,z);
     }
 }

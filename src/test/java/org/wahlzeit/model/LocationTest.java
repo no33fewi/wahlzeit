@@ -9,7 +9,7 @@ public class LocationTest {
     public void testLocation(){
         final String name = "somewhere";
 
-        CartesianCoordinate coordinate = new CartesianCoordinate(1.0,2.0,3.0);
+        CartesianCoordinate coordinate = CartesianCoordinate.getCartesianCoordinate(1.0,2.0,3.0);
         Location location = new Location(name, coordinate);
 
         Assert.assertEquals(name,location.getName());
@@ -19,8 +19,8 @@ public class LocationTest {
     @Test
     public void testSetCoordinate(){
         final String name = "somewhere";
-        CartesianCoordinate coordinate0 = new CartesianCoordinate(1.0,2.0,3.0);
-        CartesianCoordinate coordinate1 = new CartesianCoordinate(5.0,5.0,5.0);
+        CartesianCoordinate coordinate0 = CartesianCoordinate.getCartesianCoordinate(1.0,2.0,3.0);
+        CartesianCoordinate coordinate1 = CartesianCoordinate.getCartesianCoordinate(5.0,5.0,5.0);
         Location location = new Location(name, coordinate0);
 
         location.setCoordinate(coordinate1);

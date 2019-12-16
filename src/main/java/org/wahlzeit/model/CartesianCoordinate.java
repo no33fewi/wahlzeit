@@ -1,18 +1,18 @@
 package org.wahlzeit.model;
 
-import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashMap;
 
 public class CartesianCoordinate extends AbstractCoordinate {
+    private static final HashMap<Integer,CartesianCoordinate> instances = new HashMap<>();
 
-    private double x, y, z;
+    private final double x, y, z;
 
-    public CartesianCoordinate(double x, double y, double z){
-        if(!Double.isFinite(x))
+    private CartesianCoordinate(double x, double y, double z) {
+        if (!Double.isFinite(x))
             throw new IllegalArgumentException("X must be a finite value. The value " + x + " is not valid");
-        if(!Double.isFinite(y))
+        if (!Double.isFinite(y))
             throw new IllegalArgumentException("Y must be a finite value. The value " + y + " is not valid");
-        if(!Double.isFinite(z))
+        if (!Double.isFinite(z))
             throw new IllegalArgumentException("Z must be a finite value. The value " + z + " is not valid");
 
         this.x = x;
@@ -20,39 +20,52 @@ public class CartesianCoordinate extends AbstractCoordinate {
         this.z = z;
 
         assertClassInvariant();
+    }
+
+    public static CartesianCoordinate getCartesianCoordinate(double x, double y, double z) {
+        CartesianCoordinate tmp = new CartesianCoordinate(x, y, z);
+        int hash = tmp.hashCode();
+        CartesianCoordinate result = instances.get(hash);
+        if(result == null){
+            synchronized (instances){
+                result = instances.get(hash);
+                if(result==null){
+                    result = tmp;
+                    instances.put(hash,result);
+                }
+            }
+        }
+        return result;
     }
 
     public double getX() {
         return x;
     }
 
-    public void setX(double x) {
-        if(!Double.isFinite(x))
+    public CartesianCoordinate withX(double x) {
+        if (!Double.isFinite(x))
             throw new IllegalArgumentException("X must be a finite value. The value " + x + " is not valid");
-        this.x = x;
-        assertClassInvariant();
+        return getCartesianCoordinate(x, this.getY(), this.getZ());
     }
 
     public double getY() {
         return y;
     }
 
-    public void setY(double y) {
-        if(!Double.isFinite(y))
+    public CartesianCoordinate setY(double y) {
+        if (!Double.isFinite(y))
             throw new IllegalArgumentException("Y must be a finite value. The value " + y + " is not valid");
-        this.y = y;
-        assertClassInvariant();
+        return getCartesianCoordinate(this.getX(), y, this.getZ());
     }
 
     public double getZ() {
         return z;
     }
 
-    public void setZ(double z) {
-        if(!Double.isFinite(z))
+    public CartesianCoordinate setZ(double z) {
+        if (!Double.isFinite(z))
             throw new IllegalArgumentException("Z must be a finite value. The value " + z + " is not valid");
-        this.z = z;
-        assertClassInvariant();
+        return getCartesianCoordinate(this.getX(), this.getY(), z);
     }
 
     @Override
@@ -65,12 +78,12 @@ public class CartesianCoordinate extends AbstractCoordinate {
         double radius = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
         double phi = Math.atan2(this.y, this.x);
         double theta = radius == 0 ? 0 : Math.acos(this.z / radius);
-        return new SphericCoordinate(phi, theta, radius);
+        return SphericCoordinate.getSphericCoordinate(phi, theta, radius);
     }
 
     @Override
     protected void assertClassInvariant() {
-        if(!Double.isFinite(this.x)||!Double.isFinite(this.y)||!Double.isFinite(this.z))
+        if (!Double.isFinite(this.x) || !Double.isFinite(this.y) || !Double.isFinite(this.z))
             throw new IllegalStateException("Class invariant violation");
     }
 }

@@ -2,15 +2,28 @@ package org.wahlzeit.model;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotSame;
 
 public class CoordinateTest {
 
     @Test
+    public void testShared() {
+        CartesianCoordinate cc = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
+
+        SphericCoordinate sc = cc.asSphericCoordinate();
+        CartesianCoordinate ccc = sc.asCartesianCoordinate();
+        boolean equals = cc.isEqual(sc);
+
+        assertTrue(equals);
+        assertNotSame(cc,sc);
+        assertSame(cc,ccc);
+    }
+
+    @Test
     public void testInterpretation() {
-        CartesianCoordinate cc = new CartesianCoordinate(5.0,-3.0,2.0);
-        SphericCoordinate sc = new SphericCoordinate(Math.PI,0,3.0);
+        CartesianCoordinate cc = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
+        SphericCoordinate sc = SphericCoordinate.getSphericCoordinate(Math.PI,0,3.0);
 
         CartesianCoordinate ccCopy = cc.asSphericCoordinate().asCartesianCoordinate();
         SphericCoordinate scCopy = sc.asCartesianCoordinate().asSphericCoordinate();
@@ -21,8 +34,8 @@ public class CoordinateTest {
 
     @Test
     public void testIsEqual() {
-        CartesianCoordinate cc = new CartesianCoordinate(5.0,-3.0,2.0);
-        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,3.0);
+        CartesianCoordinate cc = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
+        SphericCoordinate sc = SphericCoordinate.getSphericCoordinate(4.0,8.0,3.0);
 
         boolean equals1 = cc.isEqual(cc.asSphericCoordinate());
         boolean equals2 = sc.isEqual(sc.asCartesianCoordinate());
@@ -33,8 +46,8 @@ public class CoordinateTest {
 
     @Test
     public void testHashCode() {
-        CartesianCoordinate cc = new CartesianCoordinate(5.0,-3.0,2.0);
-        SphericCoordinate sc = new SphericCoordinate(4.0,8.0,3.0);
+        CartesianCoordinate cc = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
+        SphericCoordinate sc = SphericCoordinate.getSphericCoordinate(4.0,8.0,3.0);
 
         int ccHash1 = cc.hashCode();
         int ccHash2 = cc.asSphericCoordinate().hashCode();
@@ -48,8 +61,8 @@ public class CoordinateTest {
     @Test
     public void testDistance() {
         final double delta = 0.001;
-        CartesianCoordinate cc1 = new CartesianCoordinate(5.0,-3.0,2.0);
-        CartesianCoordinate cc2 = new CartesianCoordinate(6.0,1.0,-2.0);
+        CartesianCoordinate cc1 = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
+        CartesianCoordinate cc2 = CartesianCoordinate.getCartesianCoordinate(6.0,1.0,-2.0);
 
         SphericCoordinate sc1 = cc1.asSphericCoordinate();
         SphericCoordinate sc2 = cc2.asSphericCoordinate();
@@ -63,14 +76,14 @@ public class CoordinateTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDistancePrecondition() {
-        Coordinate c1 = new CartesianCoordinate(5.0,-3.0,2.0);
+        Coordinate c1 = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
 
         c1.getCentralAngle(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCentralAnglePrecondition() {
-        Coordinate c1 = new CartesianCoordinate(5.0,-3.0,2.0);
+        Coordinate c1 = CartesianCoordinate.getCartesianCoordinate(5.0,-3.0,2.0);
 
         c1.getCentralAngle(null);
     }

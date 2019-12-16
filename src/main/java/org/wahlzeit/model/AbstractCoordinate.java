@@ -57,6 +57,11 @@ public abstract class AbstractCoordinate implements Coordinate {
         return Objects.hash(me.getX(), me.getY(), me.getZ());
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return this;
+    }
+
     public String asString() {
         CartesianCoordinate me = this.asCartesianCoordinate();
         return "(" + me.getX() + ", " + me.getY() + ", " + me.getZ() + ")";
