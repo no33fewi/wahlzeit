@@ -1,7 +1,17 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.utils.PatternInstance;
+
 import java.util.HashMap;
 
+@PatternInstance(
+        patternName = "Template Method",
+        participants = {"SubClass"}
+)
+@PatternInstance(
+        patternName = "Flyweight",
+        participants = {"Flyweight"}
+)
 public class SphericCoordinate extends AbstractCoordinate {
     private static final HashMap<Integer,SphericCoordinate> instances = new HashMap<>();
 

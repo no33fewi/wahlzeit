@@ -1,7 +1,13 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.utils.PatternInstance;
+
 import java.util.Objects;
 
+@PatternInstance(
+        patternName = "Template Method",
+        participants = {"AbstractClass"}
+)
 public abstract class AbstractCoordinate implements Coordinate {
 
     @Override

@@ -1,9 +1,14 @@
 package org.wahlzeit.model;
 
 import com.google.appengine.api.images.Image;
+import org.wahlzeit.utils.PatternInstance;
 
 import java.util.logging.Logger;
 
+@PatternInstance(
+        patternName = "Singleton",
+        participants = {"Singleton"}
+)
 public class MotorcyclePhotoManager extends PhotoManager {
 
     private static final Logger log = Logger.getLogger(MotorcyclePhotoManager.class.getName());

@@ -1,5 +1,11 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.utils.PatternInstance;
+
+@PatternInstance(
+        patternName = "Abstract Factory",
+        participants = {"ConcreteProduct"}
+)
 public class MotorcyclePhoto extends Photo {
 
     private Motorcycle motorcycle;

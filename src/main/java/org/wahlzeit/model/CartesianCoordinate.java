@@ -1,7 +1,17 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.utils.PatternInstance;
+
 import java.util.HashMap;
 
+@PatternInstance(
+        patternName = "Template Method",
+        participants = {"SubClass"}
+)
+@PatternInstance(
+        patternName = "Flyweight",
+        participants = {"Flyweight"}
+)
 public class CartesianCoordinate extends AbstractCoordinate {
     private static final HashMap<Integer,CartesianCoordinate> instances = new HashMap<>();
 
