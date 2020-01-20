@@ -47,6 +47,16 @@ public class MotorcycleTypeTest {
         assertFalse(chopperType.hasInstance(dirtBike));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddSubtype(){
+        MotorcycleType type = new MotorcycleType("Dirt Bike");
+        MotorcycleType subType = new MotorcycleType("Racing Dirt Bike");
+
+        type.addSubType(subType);
+        subType.addSubType(type);
+    }
+
+
     @Test
     public void testIsSupertype(){
         MotorcycleType type = new MotorcycleType("Dirt Bike");

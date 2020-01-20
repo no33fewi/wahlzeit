@@ -44,6 +44,8 @@ public class MotorcycleType extends DataObject {
     public void addSubType(MotorcycleType subType) {
         if(subType == null)
             throw new IllegalArgumentException("tried to set null sub-type");
+        if(isSubtypeOf(subType))
+            throw new IllegalArgumentException("The type is already a supertype. This would result in a circular type hierachy");
         subType.setSuperType(this);
         subTypes.add(subType);
     }
