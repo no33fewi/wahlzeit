@@ -16,6 +16,8 @@ import org.wahlzeit.model.persistence.PersistenceTestSuite;
         TagsTest.class,
         UserStatusTest.class,
         ValueTest.class,
+        MotorcycleTypeTest.class,
+        MotorcycleManagerTest.class,
         MotorcyclePhotoManagerTest.class,
         MotorcyclePhotoFactoryTest.class,
         MotorcyclePhotoTest.class,

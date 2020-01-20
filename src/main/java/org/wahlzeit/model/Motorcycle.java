@@ -1,12 +1,15 @@
 package org.wahlzeit.model;
 
+import org.wahlzeit.services.DataObject;
+
 import java.util.Date;
 
-public class Motorcycle {
+public class Motorcycle extends DataObject {
+
+    protected MotorcycleType type;
 
     private String brand;
     private String model;
-    private MotorcycleType type;
 
     private double weight;
     private double displacement;
@@ -15,7 +18,11 @@ public class Motorcycle {
     private Date registrationDate;
     private int kilometer;
 
-    public Motorcycle(String brand, String model, MotorcycleType type, double weight, double displacement, double power, Date registrationDate, int kilometer) {
+    public Motorcycle(MotorcycleType type){
+        this.type = type;
+    }
+
+    public Motorcycle(MotorcycleType type, String brand, String model, double weight, double displacement, double power, Date registrationDate, int kilometer) {
         if(brand == null || brand.isEmpty())
             throw new IllegalArgumentException("Brand should not be null or empty");
         if(model == null || model.isEmpty())
@@ -31,14 +38,20 @@ public class Motorcycle {
         if(!Double.isFinite(kilometer) || kilometer < 0)
             throw new IllegalArgumentException("Kilometer must be a finite number and >= 0");
 
+        this.type = type;
         this.brand = brand;
         this.model = model;
-        this.type = type;
         this.weight = weight;
         this.displacement = displacement;
         this.power = power;
         this.registrationDate = registrationDate;
         this.kilometer = kilometer;
+    }
+
+    public MotorcycleType getType() { return type; }
+
+    public void setType(MotorcycleType type) {
+        this.type = type;
     }
 
     public String getBrand() {
@@ -59,12 +72,6 @@ public class Motorcycle {
         if(model == null || model.isEmpty())
             throw new IllegalArgumentException("Model should not be null or empty");
         this.model = model;
-    }
-
-    public MotorcycleType getType() { return type; }
-
-    public void setType(MotorcycleType type) {
-        this.type = type;
     }
 
     public double getWeight() {
