@@ -4,6 +4,10 @@ import org.wahlzeit.services.DataObject;
 
 import java.util.Date;
 
+/*
+Creation Sequence: MotorcycleManager.createMotorcycle(...) -> MotorcycleType.createInstance(...) -> Motorcycle.ctor(...)
+Object Creation Solution: (separate-object, on-the-spot, n/a, in-code, by-fixed-signature / default, default)
+ */
 public class Motorcycle extends DataObject {
 
     protected MotorcycleType type;
